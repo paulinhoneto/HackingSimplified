@@ -77,6 +77,11 @@ find_subdomains(){
 }
 
 find_ips(){
+  # Checks if the massdns program is active in the operating system
+  if [ ! -x "$(command -v massdns)" ]; then
+          echo "[-] This script requires massdns. Exiting."
+          exit 1
+  fi
   echo -e "${LIGHT_YELLOW}Now doing massdns on the domain${NORMAL}"
   # Do masscanning only when massdns is finished working
   massdnsOutput=$resultDir/$domain.ips.txt
